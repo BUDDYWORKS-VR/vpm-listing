@@ -13,9 +13,6 @@
         "text":"View on GitHub"
     },
     "bannerUrl":"vmp_repo.png",
-    "githubRepos":[
-        "VRLabs/Avatars-3.0-Manager"
-    ],
     "packages":[
         {
             "name":"wtf.buddyworks.posesextension",
