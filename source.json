@@ -20,8 +20,8 @@
         {
             "name":"wtf.buddyworks.posesextension",
             "releases":[
-                "https://github.com/JustBuddy/vpm/blob/main/packages/wtf.buddyworks.posesextension-1.8.3.zip",
-                "https://github.com/JustBuddy/vpm/blob/main/packages/wtf.buddyworks.posesextension-1.8.3.zip"
+                "https://github.com/JustBuddy/vpm/raw/main/packages/wtf.buddyworks.posesextension.1.8.3.zip",
+                "https://github.com/JustBuddy/vpm/raw/main/packages/wtf.buddyworks.posesextension.1.8.3.zip"
             ]
         }
     ]
