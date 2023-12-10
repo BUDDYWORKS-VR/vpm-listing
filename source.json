@@ -13,9 +13,9 @@
         "text":"View on GitHub"
     },
     "bannerUrl":"vmp_repo.png",
-    "githubRepos":[
-        ""
-    ],
+#    "githubRepos":[
+#        ""
+#    ],
     "packages":[
         {
             "name":"wtf.buddyworks.posesextension",
