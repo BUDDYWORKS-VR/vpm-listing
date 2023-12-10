@@ -14,14 +14,13 @@
     },
     "bannerUrl":"vmp_repo.png",
     "githubRepos":[
-        "VRLabs/Avatars-3.0-Manager"
+        ""
     ],
     "packages":[
         {
-            "name":"com.vrchat.udonsharp",
+            "name":"wtf.buddyworks.posesextension",
             "releases":[
-                "https://github.com/vrchat-community/UdonSharp/releases/download/1.1.7/com.vrchat.UdonSharp.zip",
-                "https://github.com/vrchat-community/UdonSharp/releases/download/1.1.6/com.vrchat.UdonSharp-1.1.6.zip"
+                "https://github.com/JustBuddy/vpm/blob/main/packages/wtf.buddyworks.posesextension-1.8.3.zip"
             ]
         }
     ]
