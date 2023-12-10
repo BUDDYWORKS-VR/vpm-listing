@@ -1,15 +1,15 @@
 {
-    "name":"Example Listing",
-    "id":"com.vrchat.example-listing",
-    "url":"https://vrchat-community.github.io/template-package-listing/index.json",
+    "name":"BUDDYWORKS VPM",
+    "id":"com.buddyworks.vpm",
+    "url":"https://justbuddy.github.io/vpm/index.json",
     "author":{
-        "email":"developer@vrchat.com",
-        "name":"VRChat",
-        "url":"https://hello.vrchat.com"
+        "email":"hi@buddyworks.wtf",
+        "name":"BUDDYWORKS",
+        "url":"https://buddyworks.wtf"
     },
     "description":"Example listing of VRChat packages",
     "infoLink":{
-        "url":"http://github.com/vrchat-community/template-package-listing",
+        "url":"https://github.com/JustBuddy/vpm",
         "text":"View on GitHub"
     },
     "bannerUrl":"banner.png",
