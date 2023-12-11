@@ -7,7 +7,7 @@
         "name":"BUDDYWORKS",
         "url":"https://buddyworks.wtf"
     },
-    "description":"Listing of various funky packages.",
+    "description":"Listing of various funky packages. Please note that packages from this listing should not be used on avatars you plan to ship.",
     "infoLink":{
         "url":"https://github.com/JustBuddy/vpm",
         "text":"View on GitHub"
