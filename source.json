@@ -25,6 +25,12 @@
             "releases":[
                 "https://github.com/JustBuddy/vpm/raw/main/packages/wtf.buddyworks.riptrip.1.1.1.zip"
             ]
+        },
+        {
+            "name":"wtf.buddyworks.toolbox",
+            "releases":[
+                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.toolbox.0.1.0.zip"
+            ]
         }
     ]
 }
