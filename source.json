@@ -16,7 +16,14 @@
     "packages":[
         {
             "name":"wtf.buddyworks.framework",
-            "releases":["https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.framework.1.0.0.zip"
+            "releases":[
+                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.framework.1.0.0.zip"
+            ]
+        },
+        {
+            "name":"wtf.buddyworks.scene",
+            "releases":[
+                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.scene.2.2.0.zip"
             ]
         },
         {
