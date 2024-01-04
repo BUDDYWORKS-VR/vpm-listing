@@ -15,6 +15,11 @@
     "bannerUrl":"vmp_repo.png",
     "packages":[
         {
+            "name":"wtf.buddyworks.framework",
+            "releases":["https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.framework.1.0.0.zip"
+            ]
+        },
+        {
             "name":"wtf.buddyworks.posesextension",
             "releases":[
                 "https://github.com/JustBuddy/vpm/raw/main/packages/wtf.buddyworks.posesextension.1.8.3.zip"
