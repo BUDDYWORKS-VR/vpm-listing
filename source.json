@@ -44,6 +44,12 @@
                 "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.toolbox.0.1.1.zip",
                 "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.toolbox.0.1.0.zip"
             ]
+        },
+        {
+            "name":"wtf.buddyworks.gogoloco",
+            "releases":[
+                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.gogoloco.1.8.3.zip"
+            ]
         }
     ]
 }
