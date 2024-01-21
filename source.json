@@ -29,7 +29,8 @@
         {
             "name":"wtf.buddyworks.posesextension",
             "releases":[
-                "https://github.com/JustBuddy/vpm/raw/main/packages/wtf.buddyworks.posesextension.1.8.3.zip"
+                "https://github.com/JustBuddy/vpm/raw/main/packages/wtf.buddyworks.posesextension.1.8.3.zip",
+                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.posesextension.1.8.31.zip"
             ]
         },
         {
@@ -48,7 +49,8 @@
         {
             "name":"wtf.buddyworks.gogoloco",
             "releases":[
-                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.gogoloco.1.8.3.zip"
+                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.gogoloco.1.8.3.zip",
+                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.gogoloco.1.8.31.zip"
             ]
         }
     ]
