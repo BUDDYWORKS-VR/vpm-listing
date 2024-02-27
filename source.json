@@ -15,6 +15,12 @@
     "bannerUrl":"vmp_repo.png",
     "packages":[
         {
+            "name":"wtf.buddyworks.framework",
+            "releases":[
+                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.framework.2.0.0.zip"
+            ]
+        },
+        {
             "name":"wtf.buddyworks.uit",
             "releases":[
                 "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.uit.1.0.1.zip",
