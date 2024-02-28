@@ -21,6 +21,12 @@
             ]
         },
         {
+            "name":"wtf.buddyworks.scene",
+            "releases":[
+                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.scene.2.4.0.zip"
+            ]
+        },
+        {
             "name":"wtf.buddyworks.uit",
             "releases":[
                 "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.uit.1.0.1.zip",
