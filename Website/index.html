@@ -76,7 +76,10 @@ a:active {
         </fluent-tooltip>
         {{~ end; ~}}
         <div class="caption1 mb-2" id="publishedByText">Published by <a href="{{listingInfo.Author.Url}}" target="_blank">{{ listingInfo.Author.Name }}</a></div>
+        {{~ if listingInfo.InfoLink.Url ~}}
+          <div class="caption1" id="publishedByText">
 
+          </div>
         {{~ end; ~}}
       </div>
     </div>
