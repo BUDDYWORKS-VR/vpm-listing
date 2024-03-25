@@ -48,17 +48,6 @@
             ]
         },
         {
-            "name":"wtf.buddyworks.toolbox",
-            "releases":[
-                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.toolbox/wtf.buddyworks.toolbox.0.1.6.zip",
-                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.toolbox/wtf.buddyworks.toolbox.0.1.7.zip",
-                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.toolbox/wtf.buddyworks.toolbox.0.1.9.zip",
-                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.toolbox/wtf.buddyworks.toolbox.0.2.0.zip",
-                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.toolbox/wtf.buddyworks.toolbox.0.2.1.zip",
-                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.toolbox/wtf.buddyworks.toolbox.0.2.2.zip"
-            ]
-        },
-        {
             "name":"wtf.buddyworks.gogoloco",
             "releases":[
                 "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.gogoloco/wtf.buddyworks.gogoloco.1.8.3u1.zip"
