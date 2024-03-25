@@ -13,6 +13,9 @@
         "text":"View on GitHub"
     },
     "bannerUrl":"vmp_repo.png",
+    "githubRepos":[
+        "JustBuddy/wtf.buddyworks.toolbox"
+    ],
     "packages":[
         {
             "name":"wtf.buddyworks.framework",
@@ -52,8 +55,7 @@
                 "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.toolbox/wtf.buddyworks.toolbox.0.1.9.zip",
                 "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.toolbox/wtf.buddyworks.toolbox.0.2.0.zip",
                 "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.toolbox/wtf.buddyworks.toolbox.0.2.1.zip",
-                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.toolbox/wtf.buddyworks.toolbox.0.2.2.zip",
-                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.toolbox/wtf.buddyworks.toolbox.0.2.3.zip"
+                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.toolbox/wtf.buddyworks.toolbox.0.2.2.zip"
             ]
         },
         {
