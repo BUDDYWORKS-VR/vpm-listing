@@ -14,21 +14,14 @@
     },
     "bannerUrl":"vmp_repo.png",
     "githubRepos":[
-        "JustBuddy/buddyworks-toolbox"
+        "JustBuddy/buddyworks-toolbox",
+        "JustBuddy/buddyworks-scene"
     ],
     "packages":[
         {
             "name":"wtf.buddyworks.framework",
             "releases":[
                 "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.framework/wtf.buddyworks.framework.2.0.0.zip"
-            ]
-        },
-        {
-            "name":"wtf.buddyworks.scene",
-            "releases":[
-                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.scene/wtf.buddyworks.scene.2.4.0.zip",
-                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.scene/wtf.buddyworks.scene.2.4.6.zip",
-                "https://github.com/JustBuddy/vpm-listing/raw/main/packages/wtf.buddyworks.scene/wtf.buddyworks.scene.2.4.7.zip"
             ]
         },
         {
