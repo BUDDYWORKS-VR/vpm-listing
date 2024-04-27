@@ -18,6 +18,7 @@
         "JustBuddy/buddyworks-toolbox",
         "JustBuddy/buddyworks-framework",
         "JustBuddy/buddyworks-poses-extension",
-        "JustBuddy/unitypackage-icon-tool"
+        "JustBuddy/unitypackage-icon-tool",
+        "JustBuddy/buddyworks-editortools"
     ]
 }
