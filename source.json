@@ -14,11 +14,11 @@
     },
     "bannerUrl":"vmp_repo.png",
     "githubRepos":[
-        "JustBuddy/buddyworks-framework",
-        "JustBuddy/buddyworks-scene",
-        "JustBuddy/buddyworks-editortools",
-        "JustBuddy/buddyworks-poses-extension",
-        "JustBuddy/buddyworks-toolbox",
+        "BUDDYWORKS-VR/framework",
+        "BUDDYWORKS-VR/avatar-scene",
+        "BUDDYWORKS-VR/editortools",
+        "BUDDYWORKS-VR/poses-extension",
+        "BUDDYWORKS-VR/toolbox",
         "JustBuddy/unitypackage-icon-tool"
     ]
 }
