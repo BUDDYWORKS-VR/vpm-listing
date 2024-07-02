@@ -20,6 +20,7 @@
         "BUDDYWORKS-VR/poses-extension",
         "BUDDYWORKS-VR/expressions-extension",
         "BUDDYWORKS-VR/toolbox",
+        "BUDDYWORKS-VR/avatar-dynamics"
         "JustBuddy/unitypackage-icon-tool"
     ]
 }
