@@ -11,6 +11,7 @@
   <meta content="https://repo.buddyworks.wtf/repoembed.png" property="og:image" />
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#FDDA0D" />
+  <script id="discord:component-embed" type="application/json">{"component":{"type":17,"accent_color":16636429,"components":[{"type":10,"content":"# BUDDYWORKS VPM Listing"},{"type":9,"components":[{"type":10,"content":"**The official BUDDYWORKS listing for the VRChat Creator Companion.**\n\nAll our tools and prefabs in one place. Add the listing once and get every package and update right inside VCC."}],"accessory":{"type":11,"media":{"url":"https://buddyworks.wtf/assets/images/favicon.png"}}},{"type":14,"spacing":1},{"type":10,"content":"-# Listing URL: `https://repo.buddyworks.wtf/index.json`"},{"type":1,"components":[{"type":2,"style":5,"url":"https://repo.buddyworks.wtf/?addVPM","label":"➕ Add to VCC"},{"type":2,"style":5,"url":"https://repo.buddyworks.wtf","label":"📦 Packages"},{"type":2,"style":5,"url":"https://docs.buddyworks.wtf","label":"📖 Docs"}]}]}}</script>
   <link rel="icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -117,6 +118,31 @@
       <p class="small">With ❤ by BUDDYWORKS</p>
     </footer>
   </main>
+
+  <dialog class="card modal" id="addToVccPrompt" aria-labelledby="addToVccPromptTitle">
+    <div class="modal-head">
+      <h3 class="modal-title" id="addToVccPromptTitle">Adding the listing to VCC</h3>
+      <button type="button" class="btn btn-small btn-icon modal-close" aria-label="Close">
+        <svg aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+    <p>Your browser should now ask to open the <strong>VRChat Creator Companion</strong>. Confirm it and VCC will show the listing for you to add.</p>
+    <p>Nothing happened? Press the button below, or add the listing by hand.</p>
+    <ul class="buttons">
+      <li>
+        <button type="button" class="btn btn-large btn-primary" id="addToVccPromptButton">
+          <svg aria-hidden="true"><use href="#i-plus"/></svg>
+          <span>Add to VCC</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="btn btn-large" id="addToVccPromptHelp">
+          <svg aria-hidden="true"><use href="#i-help"/></svg>
+          <span>How to add</span>
+        </button>
+      </li>
+    </ul>
+  </dialog>
 
   <dialog class="card modal" id="addListingToVccHelp" aria-labelledby="addListingToVccHelpTitle">
     <div class="modal-head">

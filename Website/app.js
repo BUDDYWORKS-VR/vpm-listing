@@ -54,6 +54,29 @@ $('urlBarHelp').addEventListener('click', () => openDialog(helpDialog));
 $('packageInfoListingHelp').addEventListener('click', () => openDialog(helpDialog));
 $('vccAddRepoButton').addEventListener('click', addToVcc);
 
+// ---------- ?addVPM deep link ----------
+// Discord embed buttons only allow https links, so the embed points at
+// https://repo.buddyworks.wtf/?addVPM and the page forwards to vcc:// itself.
+
+const promptDialog = $('addToVccPrompt');
+$('addToVccPromptButton').addEventListener('click', addToVcc);
+$('addToVccPromptHelp').addEventListener('click', () => {
+  promptDialog.close();
+  openDialog(helpDialog);
+});
+
+const params = new URLSearchParams(window.location.search);
+const addKeys = [...params.keys()].filter((key) => key.toLowerCase() === 'addvpm');
+if (addKeys.length > 0) {
+  // Drop the parameter so a reload doesn't trigger VCC again.
+  addKeys.forEach((key) => params.delete(key));
+  const query = params.toString();
+  history.replaceState(null, '', window.location.pathname + (query ? `?${query}` : '') + window.location.hash);
+
+  openDialog(promptDialog);
+  addToVcc();
+}
+
 // ---------- Copy buttons ----------
 
 document.querySelectorAll('.copy-button').forEach((button) => {
