@@ -1,5 +1,3 @@
-import { baseLayerLuminance, StandardLuminance } from 'https://unpkg.com/@fluentui/web-components@2.6.1';
-
 const LISTING_URL = "{{ listingInfo.Url }}";
 
 const PACKAGES = {
@@ -29,203 +27,140 @@ const PACKAGES = {
 {{~ end ~}}
 };
 
-const setTheme = () => {
-  const isDarkTheme = () => window.matchMedia("(prefers-color-scheme: dark)").matches;
-  if (isDarkTheme()) {
-    baseLayerLuminance.setValueFor(document.documentElement, StandardLuminance.DarkMode);
-  } else {
-    baseLayerLuminance.setValueFor(document.documentElement, StandardLuminance.LightMode);
-  }
-}
+const $ = (id) => document.getElementById(id);
+const addToVcc = () => window.location.assign(`vcc://vpm/addRepo?url=${encodeURIComponent(LISTING_URL)}`);
 
-(() => {
-  setTheme();
+// ---------- Dialogs ----------
 
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-    setTheme();
+const openDialog = (dialog) => {
+  if (!dialog.open) dialog.showModal();
+};
+
+document.querySelectorAll('dialog').forEach((dialog) => {
+  dialog.querySelectorAll('.modal-close').forEach((button) => {
+    button.addEventListener('click', () => dialog.close());
   });
-
-  const packageGrid = document.getElementById('packageGrid');
-
-  const searchInput = document.getElementById('searchInput');
-  searchInput.addEventListener('input', ({ target: { value = '' }}) => {
-    const items = packageGrid.querySelectorAll('fluent-data-grid-row[row-type="default"]');
-    items.forEach(item => {
-      if (value === '') {
-        item.style.display = 'grid';
-        return;
-      }
-      if (
-        item.dataset?.packageName?.toLowerCase()?.includes(value.toLowerCase()) ||
-        item.dataset?.packageId?.toLowerCase()?.includes(value.toLowerCase())
-      ) {
-        item.style.display = 'grid';
-      } else {
-        item.style.display = 'none';
-      }
-    });
+  // Close when clicking the backdrop (outside the dialog box).
+  dialog.addEventListener('click', (e) => {
+    if (e.target !== dialog) return;
+    const r = dialog.getBoundingClientRect();
+    const inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+    if (!inside) dialog.close();
   });
+});
 
-  const urlBarHelpButton = document.getElementById('urlBarHelp');
-  const addListingToVccHelp = document.getElementById('addListingToVccHelp');
-  urlBarHelpButton.addEventListener('click', () => {
-    addListingToVccHelp.hidden = false;
+const helpDialog = $('addListingToVccHelp');
+$('urlBarHelp').addEventListener('click', () => openDialog(helpDialog));
+$('packageInfoListingHelp').addEventListener('click', () => openDialog(helpDialog));
+$('vccAddRepoButton').addEventListener('click', addToVcc);
+
+// ---------- Copy buttons ----------
+
+document.querySelectorAll('.copy-button').forEach((button) => {
+  const label = button.querySelector('span');
+  const original = label.textContent;
+  let timer;
+  button.addEventListener('click', async () => {
+    const field = $(button.dataset.copyTarget);
+    field.select();
+    try {
+      await navigator.clipboard.writeText(field.value);
+    } catch {
+      document.execCommand('copy');
+    }
+    button.classList.add('is-copied');
+    label.textContent = 'Copied!';
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      button.classList.remove('is-copied');
+      label.textContent = original;
+    }, 1200);
   });
-  const addListingToVccHelpClose = document.getElementById('addListingToVccHelpClose');
-  addListingToVccHelpClose.addEventListener('click', () => {
-    addListingToVccHelp.hidden = true;
+});
+
+// ---------- Search ----------
+
+const searchInput = $('searchInput');
+const searchEmpty = $('searchEmpty');
+const packageRows = [...document.querySelectorAll('#packageList .package')];
+
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.trim().toLowerCase();
+  let visible = 0;
+  packageRows.forEach((row) => {
+    const match = query === ''
+      || row.dataset.packageName?.toLowerCase().includes(query)
+      || row.dataset.packageId?.toLowerCase().includes(query);
+    row.classList.toggle('hidden', !match);
+    if (match) visible++;
   });
+  searchEmpty.classList.toggle('hidden', visible > 0);
+});
 
-  const vccListingInfoUrlFieldCopy = document.getElementById('vccListingInfoUrlFieldCopy');
-  vccListingInfoUrlFieldCopy.addEventListener('click', () => {
-    const vccUrlField = document.getElementById('vccListingInfoUrlField');
-    vccUrlField.select();
-    navigator.clipboard.writeText(vccUrlField.value);
-    vccUrlFieldCopy.appearance = 'accent';
-    setTimeout(() => {
-      vccUrlFieldCopy.appearance = 'neutral';
-    }, 1000);
+// ---------- Package info ----------
+
+const infoDialog = $('packageInfoModal');
+const info = {
+  name: $('packageInfoName'),
+  id: $('packageInfoId'),
+  version: $('packageInfoVersion'),
+  description: $('packageInfoDescription'),
+  author: $('packageInfoAuthor'),
+  dependencies: $('packageInfoDependencies'),
+  keywords: $('packageInfoKeywords'),
+  license: $('packageInfoLicense'),
+};
+const toggleBlock = (id, show) => $(id).classList.toggle('hidden', !show);
+
+document.querySelectorAll('.rowPackageInfoButton').forEach((button) => {
+  button.addEventListener('click', () => {
+    const packageId = button.dataset.packageId;
+    const pkg = PACKAGES[packageId];
+    if (!pkg) {
+      console.error(`Did not find package ${packageId}. Packages available:`, PACKAGES);
+      return;
+    }
+
+    info.name.textContent = pkg.displayName || pkg.name;
+    info.id.textContent = packageId;
+    info.version.textContent = `v${pkg.version}`;
+    info.description.textContent = pkg.description;
+
+    toggleBlock('packageInfoAuthorBlock', !!pkg.author.name);
+    info.author.textContent = pkg.author.name;
+    if (pkg.author.url) {
+      info.author.href = pkg.author.url;
+    } else {
+      info.author.removeAttribute('href');
+    }
+
+    const deps = Object.entries(pkg.dependencies);
+    toggleBlock('packageInfoDependenciesBlock', deps.length > 0);
+    info.dependencies.replaceChildren(...deps.map(([name, version]) => {
+      const li = document.createElement('li');
+      const code = document.createElement('code');
+      code.textContent = name;
+      li.append(code, ` @ v${version}`);
+      return li;
+    }));
+
+    toggleBlock('packageInfoKeywordsBlock', pkg.keywords.length > 0);
+    info.keywords.replaceChildren(...pkg.keywords.map((keyword) => {
+      const badge = document.createElement('span');
+      badge.className = 'badge';
+      badge.textContent = keyword;
+      return badge;
+    }));
+
+    toggleBlock('packageInfoLicenseBlock', !!(pkg.license || pkg.licensesUrl));
+    info.license.textContent = pkg.license || 'See License';
+    if (pkg.licensesUrl) {
+      info.license.href = pkg.licensesUrl;
+    } else {
+      info.license.removeAttribute('href');
+    }
+
+    openDialog(infoDialog);
+    infoDialog.scrollTop = 0;
   });
-
-  const vccAddRepoButton = document.getElementById('vccAddRepoButton');
-  vccAddRepoButton.addEventListener('click', () => window.location.assign(`vcc://vpm/addRepo?url=${encodeURIComponent(LISTING_URL)}`));
-
-  const vccUrlFieldCopy = document.getElementById('vccUrlFieldCopy');
-  vccUrlFieldCopy.addEventListener('click', () => {
-    const vccUrlField = document.getElementById('vccUrlField');
-    vccUrlField.select();
-    navigator.clipboard.writeText(vccUrlField.value);
-    vccUrlFieldCopy.appearance = 'accent';
-    setTimeout(() => {
-      vccUrlFieldCopy.appearance = 'neutral';
-    }, 1000);
-  });
-
-  const rowMoreMenu = document.getElementById('rowMoreMenu');
-  const hideRowMoreMenu = e => {
-    if (rowMoreMenu.contains(e.target)) return;
-    document.removeEventListener('click', hideRowMoreMenu);
-    rowMoreMenu.hidden = true;
-  }
-
-  const rowMenuButtons = document.querySelectorAll('.rowMenuButton');
-  rowMenuButtons.forEach(button => {
-    button.addEventListener('click', e => {
-      if (rowMoreMenu?.hidden) {
-        rowMoreMenu.style.top = `${e.clientY + e.target.clientHeight}px`;
-        rowMoreMenu.style.left = `${e.clientX - 120}px`;
-        rowMoreMenu.hidden = false;
-
-        const downloadLink = rowMoreMenu.querySelector('#rowMoreMenuDownload');
-        const downloadListener = () => {
-          window.open(e?.target?.dataset?.packageUrl, '_blank');
-        }
-        downloadLink.addEventListener('change', () => {
-          downloadListener();
-          downloadLink.removeEventListener('change', downloadListener);
-        });
-
-        setTimeout(() => {
-          document.addEventListener('click', hideRowMoreMenu);
-        }, 1);
-      }
-    });
-  });
-
-  const packageInfoModal = document.getElementById('packageInfoModal');
-  const packageInfoModalClose = document.getElementById('packageInfoModalClose');
-  packageInfoModalClose.addEventListener('click', () => {
-    packageInfoModal.hidden = true;
-  });
-
-  // Fluent dialogs use nested shadow-rooted elements, so we need to use JS to style them
-  const modalControl = packageInfoModal.shadowRoot.querySelector('.control');
-  modalControl.style.maxHeight = "90%";
-  modalControl.style.transition = 'height 0.2s ease-in-out';
-  modalControl.style.overflowY = 'hidden';
-
-  const packageInfoName = document.getElementById('packageInfoName');
-  const packageInfoId = document.getElementById('packageInfoId');
-  const packageInfoVersion = document.getElementById('packageInfoVersion');
-  const packageInfoDescription = document.getElementById('packageInfoDescription');
-  const packageInfoAuthor = document.getElementById('packageInfoAuthor');
-  const packageInfoDependencies = document.getElementById('packageInfoDependencies');
-  const packageInfoKeywords = document.getElementById('packageInfoKeywords');
-  const packageInfoLicense = document.getElementById('packageInfoLicense');
-
-  const rowAddToVccButtons = document.querySelectorAll('.rowAddToVccButton');
-  rowAddToVccButtons.forEach((button) => {
-    button.addEventListener('click', () => window.location.assign(`vcc://vpm/addRepo?url=${encodeURIComponent(LISTING_URL)}`));
-  });
-
-  const rowPackageInfoButton = document.querySelectorAll('.rowPackageInfoButton');
-  rowPackageInfoButton.forEach((button) => {
-    button.addEventListener('click', e => {
-      const packageId = e.target.dataset?.packageId;
-      const packageInfo = PACKAGES?.[packageId];
-      if (!packageInfo) {
-        console.error(`Did not find package ${packageId}. Packages available:`, PACKAGES);
-        return;
-      }
-
-      packageInfoName.textContent = packageInfo.displayName;
-      packageInfoId.textContent = packageId;
-      packageInfoVersion.textContent = `v${packageInfo.version}`;
-      packageInfoDescription.textContent = packageInfo.description;
-      packageInfoAuthor.textContent = packageInfo.author.name;
-      packageInfoAuthor.href = packageInfo.author.url;
-
-      if ((packageInfo.keywords?.length ?? 0) === 0) {
-        packageInfoKeywords.parentElement.classList.add('hidden');
-      } else {
-        packageInfoKeywords.parentElement.classList.remove('hidden');
-        packageInfoKeywords.innerHTML = null;
-        packageInfo.keywords.forEach(keyword => {
-          const keywordDiv = document.createElement('div');
-          keywordDiv.classList.add('me-2', 'mb-2', 'badge');
-          keywordDiv.textContent = keyword;
-          packageInfoKeywords.appendChild(keywordDiv);
-        });
-      }
-
-      if (!packageInfo.license?.length && !packageInfo.licensesUrl?.length) {
-        packageInfoLicense.parentElement.classList.add('hidden');
-      } else {
-        packageInfoLicense.parentElement.classList.remove('hidden');
-        packageInfoLicense.textContent = packageInfo.license ?? 'See License';
-        packageInfoLicense.href = packageInfo.licensesUrl ?? '#';
-      }
-
-      packageInfoDependencies.innerHTML = null;
-      Object.entries(packageInfo.dependencies).forEach(([name, version]) => {
-        const depRow = document.createElement('li');
-        depRow.classList.add('mb-2');
-        depRow.textContent = `${name} @ v${version}`;
-        packageInfoDependencies.appendChild(depRow);
-      });
-
-      packageInfoModal.hidden = false;
-
-      setTimeout(() => {
-        const height = packageInfoModal.querySelector('.col').clientHeight;
-        modalControl.style.setProperty('--dialog-height', `${height + 14}px`);
-      }, 1);
-    });
-  });
-
-  const packageInfoVccUrlFieldCopy = document.getElementById('packageInfoVccUrlFieldCopy');
-  packageInfoVccUrlFieldCopy.addEventListener('click', () => {
-    const vccUrlField = document.getElementById('packageInfoVccUrlField');
-    vccUrlField.select();
-    navigator.clipboard.writeText(vccUrlField.value);
-    vccUrlFieldCopy.appearance = 'accent';
-    setTimeout(() => {
-      vccUrlFieldCopy.appearance = 'neutral';
-    }, 1000);
-  });
-
-  const packageInfoListingHelp = document.getElementById('packageInfoListingHelp');
-  packageInfoListingHelp.addEventListener('click', () => {
-    addListingToVccHelp.hidden = false;
-  });
-})();
+});
