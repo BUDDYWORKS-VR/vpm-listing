@@ -573,8 +573,13 @@ code {
     margin-top: 0;
   }
 
+  /* contain: size keeps the package list from stretching the rows, so the column
+     takes its height from the info and links on the left and scrolls inside. */
   .pane-packages {
     grid-area: 1 / 2 / span 2;
+    align-self: stretch;
+    contain: size;
+    min-height: 24rem;
   }
 
   .heading {
@@ -594,6 +599,32 @@ code {
 
   .buttons-cta .btn-large {
     width: 100%;
+  }
+}
+
+/* Packages card fills its column; heading and search stay put, only the list scrolls. */
+@media (pointer: coarse) and (orientation: landscape) and (min-width: 720px), (horizontal-viewport-segments: 2) {
+  .packages {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .search,
+  .empty {
+    flex: none;
+  }
+
+  .package-list {
+    flex: 1 1 auto;
+    min-height: 0;
+    margin: 0 -0.5rem;
+    padding: 0 0.5rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) transparent;
   }
 }
 
