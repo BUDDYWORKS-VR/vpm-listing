@@ -35,6 +35,7 @@
 
   <main class="site">
 
+    <div class="pane pane-info">
     <header class="hero">
       <a href="https://buddyworks.wtf" class="hero-wordmark" target="_blank" rel="noopener">
         <img src="Buddyworks_Text.png" width="1545" height="195" alt="BUDDYWORKS">
@@ -47,7 +48,7 @@
         {{ if listingInfo.Description }}{{ listingInfo.Description }}{{ end }}
       </p>
 
-      <ul class="buttons">
+      <ul class="buttons buttons-cta">
         <li>
           <button type="button" class="btn btn-large btn-primary" id="vccAddRepoButton">
             <svg aria-hidden="true"><use href="#i-plus"/></svg>
@@ -70,7 +71,9 @@
         </button>
       </div>
     </section>
+    </div>
 
+    <div class="pane pane-packages">
     <h2 class="heading">Packages</h2>
 
     <section class="card packages">
@@ -104,6 +107,7 @@
       </ul>
       <p class="empty hidden" id="searchEmpty">No packages match your search.</p>
     </section>
+    </div>
 
     <footer class="footer">
       <p class="label">Links</p>
@@ -128,7 +132,7 @@
     </div>
     <p>Your browser should now ask to open the <strong>VRChat Creator Companion</strong>. Confirm it and VCC will show the listing for you to add.</p>
     <p>Nothing happened? Press the button below, or add the listing by hand.</p>
-    <ul class="buttons">
+    <ul class="buttons buttons-cta">
       <li>
         <button type="button" class="btn btn-large btn-primary" id="addToVccPromptButton">
           <svg aria-hidden="true"><use href="#i-plus"/></svg>
